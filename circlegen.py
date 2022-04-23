@@ -7,18 +7,16 @@ def printFirstHalf():
     for distanceFromCircle in range(distanceFromCircle, 0, -1):
         if distanceFromCircle % 4 == 0:
             sectionToRender = ""
+            solidSection = int(
+                math.sqrt(pow(radius, 2) - pow(distanceFromCircle, 2)))
+            emptySection = int(diameter - solidSection)
+            halfEmptySection = int(emptySection / 2)
+            sectionToRender = halfEmptySection * " " + \
+                solidSection * "0" + halfEmptySection * " "
+            print(sectionToRender)
+            time.sleep(0.05)
 
-            match response_code:
-                case 200:
-                    print("Everything's peachy!")
-    case 300:
-        print("You're going somewhere else!")
-    case 400:
-        print("Uh oh. Are you lost?")
-    case 500:
-        print("Yikes. Something went wrong!")
-
-        print(sectionToRender)
+            
 
 
 def printSecondHalf():
