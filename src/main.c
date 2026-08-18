@@ -37,19 +37,27 @@ TerminalSize get_terminal_size()
 
 int main(int argc, char *argv[])
 {
-  // We can parse argc/argv here later for custom colors or speeds
   (void)argc;
   (void)argv;
 
-  TerminalSize term_size = get_terminal_size();
+  int frame = 0;
 
-  // Clear the screen using ANSI escape codes
-  printf("\033[2J\033[H");
+  // Endless loop for our terminal screensaver
+  while (1)
+  {
+    TerminalSize term_size = get_terminal_size();
 
-  printf("Terminal size detected: %d columns x %d rows\n", term_size.width, term_size.height);
+    // Clear the screen and reset cursor to top-left
+    printf("\033[2J\033[H");
 
-  // Call the rendering logic (make sure render.c is set up!)
-  render_spiral(term_size);
+    // Render the spiral frame using the frame counter to animate it
+    render_spiral(term_size, frame);
+
+    // Wait 50 milliseconds (~20 frames per second) so it doesn't flicker wildly
+    sleep_ms(50);
+
+    frame++;
+  }
 
   return 0;
 }
